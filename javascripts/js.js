@@ -1,4 +1,7 @@
-var btn = document.getElementsByTagName("input")[0];
-btn.onclick = function () {
+var btn = document.getElementsByTagName("input");
+btn[0].onclick = function () {
     window.open("BlackAndWhite.html");
+};
+btn[1].onclick = function () {
+    window.open("Puzzle.html");
 };

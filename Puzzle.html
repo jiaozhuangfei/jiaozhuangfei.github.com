@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拼图</title>
+    <style type="text/css">
+        html,body,div,span{margin: 0; padding: 0; font-size: 0;}
+        #outSide{padding: 10px; margin: 50px auto; border: 5px solid lightskyblue; width: 806px; border-radius: 6px; background: #ccc; position: relative;}
+        #allBody{width: 600px; height: 600px; position: relative; display: inline-block;}
+        #sides{width: 190px; background-color: #ffffff; height: 600px; display: inline-block; margin-left: 10px; position: absolute; top: 10px; right: 10px; border: 3px solid lightskyblue; font-family: "Microsoft YaHei UI"; font-size: 20px; text-align: center;}
+        #sides div{background: url("images/pic.jpg"); background-size: 190px; width: 190px; height: 190px;}
+        span{display: inline-block; width: 200px; height: 200px; background-size: 200px; position: absolute; cursor: pointer; transition: 0.2s;}
+    </style>
+</head>
+<body>
+    <div id = "outSide">
+        <div id = "allBody">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div id = "sides">
+            <div></div>
+            <h1>次数</h1>
+            <p>N/A</p>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var posAry = [[0,0],[200,0],[400,0],[0,200],[200,200],[400,200],[0,400],[200,400],[400,400]];
+        var oBody = document.getElementById("allBody");
+        var spans = oBody.getElementsByTagName("span");
+        var sumP = document.getElementById("sides").getElementsByTagName("p")[0];
+        var total = 0;
+        for(var i = 1; i < spans.length; i++){
+            spans[i].index = i;
+            spans[i].style.backgroundImage = "url(./images/pic_0" + (i + 1) + ".gif)";
+        }
+        function ranPos() {
+            var ary = posAry.slice();
+            var i = 0;
+            while (ary.length){
+                var ran = Math.round(Math.random() * (ary.length - 1));
+                var pos = ary[ran];
+                spans[i].style.top = pos[0] + "px";
+                spans[i++].style.left = pos[1] + "px";
+                ary.splice(ran,1);
+            }
+            ary = null;
+        }
+        ranPos();
+        function checkPos() {
+            for(var i = 0; i < spans.length; i++){
+                if(parseFloat(spans[i].style.top) != posAry[i][1] || parseFloat(spans[i].style.left) != posAry[i][0]){
+                    return;
+                }
+            }
+            window.setTimeout(function () {
+                alert("Congratulation！Your score is : " + sumP.innerHTML + "次");
+                ranPos();
+                sumP.innerHTML = "N/A";
+            },700);
+        }
+        (function () {
+            for(var i = 0; i < spans.length; i++){
+                spans[i].onclick = function () {
+                    var leftValue = parseFloat(this.style.left);
+                    var topValue = parseFloat(this.style.top);
+                    if(parseFloat(spans[0].style.top) == topValue && parseFloat(spans[0].style.left) != leftValue){
+                        if(((parseFloat(spans[0].style.left) - 200) == leftValue) || ((parseFloat(spans[0].style.left) + 200) == leftValue)){
+                            this.style.left = spans[0].style.left;
+                            spans[0].style.left = leftValue + "px";
+                            sumP.innerHTML = ++total;
+                        }
+                    }else if(parseFloat(spans[0].style.top) != topValue && parseFloat(spans[0].style.left) == leftValue){
+                        if(((parseFloat(spans[0].style.top) - 200) == topValue) || ((parseFloat(spans[0].style.top) + 200) == topValue)){
+                            this.style.top = spans[0].style.top;
+                            spans[0].style.top = topValue + "px";
+                            sumP.innerHTML = ++total;
+                        }
+                    }
+                    checkPos();
+                }
+            }
+        })();
+    </script>
+</body>
+</html>
