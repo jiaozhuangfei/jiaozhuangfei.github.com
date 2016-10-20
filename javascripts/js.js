@@ -5,3 +5,6 @@ btn[0].onclick = function () {
 btn[1].onclick = function () {
     window.open("Puzzle.html");
 };
+btn[2].onclick = function () {
+    window.open("Whac-A-Mole.html");
+};
