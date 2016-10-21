@@ -8,7 +8,6 @@
         #box{width: 500px; margin: 300px auto; font-size: 0;}
         span{display: inline-block; width: 94px; height: 94px; background-color: white; border: 3px solid transparent;}
         b{display: inline-block; width: 294px; height: 94px; font-size: 80px; line-height: 100px; text-align: center; vertical-align: top; cursor: pointer; background-color: white; border: 3px solid transparent;}
-        b:hover{border-color: red;}
     </style>
 </head>
 <body>
@@ -25,6 +24,12 @@
         var timer2 = 0;
         var total = 10;
         var speed = 1;
+        b.onmousemove = function () {
+            b.style.borderColor = "red";
+        };
+        b.onmouseout = function () {
+            b.style.borderColor = "transparent";
+        };
         b.onclick = function () {
             if(timer != 0){return;}
             var key = Math.round(Math.random() * 11);
