@@ -8,3 +8,6 @@ btn[1].onclick = function () {
 btn[2].onclick = function () {
     window.open("Whac-A-Mole.html");
 };
+btn[3].onclick = function () {
+    window.open("Lucky color.html");
+};

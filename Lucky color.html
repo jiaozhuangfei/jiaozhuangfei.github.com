@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lucky color</title>
+    <style type="text/css">
+        html,body,div,span,input{margin: 0; padding: 0; -webkit-user-select: none;}
+        body{background-color: #000;}
+        #box{width: 500px; margin: 100px auto; font-size: 0;}
+        span{display: inline-block; width: 94px; height: 94px; background-color: white; border: 3px solid transparent;}
+        b{display: inline-block; width: 300px; height: 100px; font-size: 80px; line-height: 100px; text-align: center; vertical-align: top; cursor: pointer; background-color: white;}
+    </style>
+</head>
+<body>
+    <div id="box">
+        <span></span><span></span><span></span><span></span><span></span><span></span><b>Start</b><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <script type="text/javascript">
+        var spans = document.getElementsByTagName("span");
+        var ary = [spans[0],spans[1],spans[2],spans[3],spans[4],spans[6],spans[11],spans[10],spans[9],spans[8],spans[7],spans[5]];
+        var colAry = ["lightSkyBlue","green","blue","pink","yellow","purple","khaki","lavender","lightGreen","cornflowerBlue","chocolate","slateGray","deepPink"];
+        var b = document.getElementsByTagName("b")[0];
+        var timer = 0;
+        var timer2 = 0;
+        var total = 10;
+        var speed = 1;
+        b.onclick = function () {
+            if(timer != 0){return;}
+            var key = Math.round(Math.random() * 11);
+            timer2 = window.setInterval(function () {
+                if(speed == 15){return}
+                speed += 1;
+            },1000);
+            timer = window.setInterval(function () {
+                if(total%speed){
+                    total += 1;
+                    return;
+                }
+                if(key == 12){
+                    ary[11].style.borderColor = "transparent";
+                    ary[0].style.borderColor = "red";
+                    key = 0;
+                }else{
+                    if(key != 0){
+                        ary[key - 1].style.borderColor = "transparent";
+                    }
+                    if(ary[0].style.borderColor == "red"){
+                        ary[1].style.borderColor = "red";
+                        ary[0].style.borderColor = "transparent";
+                        key += 2;
+                    }else{
+                        ary[key].style.borderColor = "red";
+                        key++;
+                    }
+                }
+                if(total >= Math.round(Math.random() * 100 + 250) && key != 0){
+                    speed = 1;
+                    window.clearInterval(timer);
+                    window.clearInterval(timer2);
+                    timer = 0;
+                    timer2 = 0;
+                    total = 10;
+                    window.setTimeout(function () {
+                        alert("Your color is " + ary[key - 1].style.backgroundColor);
+                        ary[key - 1].style.borderColor = "transparent";
+                        ranCol();
+                    },200);
+                }
+                total += 1;
+            },50);
+        };
+        function ranCol() {
+            var temp = colAry.slice();
+            var num = null;
+            for(var i = 0; i < spans.length; i++){
+                num = Math.round(Math.random() * (temp.length - 1));
+                spans[i].style.backgroundColor = temp[num];
+                console.log(temp[num]);
+                temp.splice(num, 1);
+            }
+            temp = null;
+        }
+        ranCol();
+    </script>
+</body>
+</html>
