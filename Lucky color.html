@@ -18,6 +18,7 @@
         var spans = document.getElementsByTagName("span");
         var ary = [spans[0],spans[1],spans[2],spans[3],spans[4],spans[6],spans[11],spans[10],spans[9],spans[8],spans[7],spans[5]];
         var colAry = ["lightSkyBlue","green","blue","pink","yellow","purple","khaki","lavender","lightGreen","cornflowerBlue","chocolate","slateGray","deepPink"];
+        var col = [];
         var b = document.getElementsByTagName("b")[0];
         var timer = 0;
         var timer2 = 0;
@@ -60,7 +61,8 @@
                     timer2 = 0;
                     total = 10;
                     window.setTimeout(function () {
-                        alert("Your color is " + ary[key - 1].style.backgroundColor);
+                        alert("Your color is " + col[key - 1]);
+                        col = [];
                         ary[key - 1].style.borderColor = "transparent";
                         ranCol();
                     },200);
@@ -74,7 +76,7 @@
             for(var i = 0; i < spans.length; i++){
                 num = Math.round(Math.random() * (temp.length - 1));
                 spans[i].style.backgroundColor = temp[num];
-                console.log(temp[num]);
+                col.push(temp[num]);
                 temp.splice(num, 1);
             }
             temp = null;
