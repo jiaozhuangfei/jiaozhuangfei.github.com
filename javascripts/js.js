@@ -11,3 +11,6 @@ btn[2].onclick = function () {
 btn[3].onclick = function () {
     window.open("Lucky color.html");
 };
+btn[4].onclick = function () {
+    window.open("./resume/resume.html");
+};
