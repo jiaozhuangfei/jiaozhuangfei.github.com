@@ -65,71 +65,81 @@ var $lock = $('.topInfo i'),
 var main = $('.main')[0];
 /*音乐控制*/
 var musicPlay = (function () {
-    var music = $(main).children('.music')[0],
-        audio = $(music).children('audio')[0],
-        $lis = $(music).find('li');
-    function on_off(flag) {
-        if(flag){
-            $lis.each(function (index, item) {
-                item.style.animationPlayState = 'running';
-            })
-        }else {
-            $lis.each(function (index, item) {
-                item.style.animationPlayState = 'paused';
-            })
+    function musicReset() {
+        var music = $(main).children('.music')[0],
+            audio = $(music).children('audio')[0],
+            $lis = $(music).find('li');
+        function on_off(flag) {
+            if(flag){
+                $lis.each(function (index, item) {
+                    item.style.animationPlayState = 'running';
+                })
+            }else {
+                $lis.each(function (index, item) {
+                    item.style.animationPlayState = 'paused';
+                })
+            }
         }
-    }
-    audio.addEventListener('canplay', function () {
-        on_off(1);
-    });
-    music.onclick = function () {
-        if(audio.paused){
+        window.setTimeout(function () {
             audio.play();
-            on_off(1);
-        }else {
-            audio.pause();
-            on_off(0);
-        }
-    };
+            audio.addEventListener('canplay', function () {
+                on_off(1);
+            });
+        }, 1000);
+        music.onclick = function () {
+            if(audio.paused){
+                audio.play();
+                on_off(1);
+            }else {
+                audio.pause();
+                on_off(0);
+            }
+        };
+    }
     return {
         init: function () {
-
+            musicReset();
         }
     }
 })();
-musicPlay.init();
 
 /*顶部状态栏*/
 var topState = (function () {
-    var topInfo = $('.topInfo')[0],
-        $lis = $(topInfo).find('li'),
-        right = $(topInfo).find('.right')[0],
-        inner = $(right).find('.inner'),
-        $span = $(right).find('span'),
-        total = 100,
-        ranNum = 0;
-    window.setInterval(function () {
-        ranNum = $lis.length - Math.round(Math.random() * 3) - 1;
-        $lis.each(function (index, item) {
-            if(index > 1){
-                index > ranNum ? $(item).css('backgroundColor', 'transparent') : $(item).css('backgroundColor', '#fff');
+    function topReset() {
+        var topInfo = $('.topInfo')[0],
+            $lis = $(topInfo).find('li'),
+            right = $(topInfo).find('.right')[0],
+            inner = $(right).find('.inner'),
+            $span = $(right).find('span'),
+            total = 100,
+            ranNum = 0;
+        window.setInterval(function () {
+            ranNum = $lis.length - Math.round(Math.random() * 3) - 1;
+            $lis.each(function (index, item) {
+                if(index > 1){
+                    index > ranNum ? $(item).css('backgroundColor', 'transparent') : $(item).css('backgroundColor', '#fff');
+                }
+            })
+        }, 5000);
+        var totalWidth = parseFloat($(inner).css('width'));
+        inner.timer = window.setInterval(function () {
+            if(total == 20){
+                $(inner).css('backgroundColor', 'red');
             }
-        })
-    }, 5000);
-    var totalWidth = parseFloat($(inner).css('width'));
-    inner.timer = window.setInterval(function () {
-        if(total == 20){
-            $(inner).css('backgroundColor', 'red');
-        }
-        if(total == 3){
-            window.clearInterval(inner.timer);
-        }
-        $(inner).css('width', totalWidth * total / 100);
-        $span.html(total-- + '%');
-    }, 3000);
+            if(total == 3){
+                window.clearInterval(inner.timer);
+            }
+            $(inner).css('width', totalWidth * total / 100);
+            $span.html(total-- + '%');
+        }, 3000);
+    }
     return {
         init: function () {
-
+            topReset();
         }
     }
 })();
+window.onload = function () {
+    musicPlay.init();
+    topState.init();
+};
