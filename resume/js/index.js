@@ -26,7 +26,7 @@ var $lock = $('.topInfo i'),
                 loop: true,
                 effect: 'coverflow',
                 direction: 'horizontal',
-                autoplay: 7000,
+                //autoplay: 7000,
                 autoplayDisableOnInteraction: false,
                 onTransitionEnd: function (swiper) {
                     var curIndex = swiper.activeIndex,
@@ -102,7 +102,98 @@ var musicPlay = (function () {
         }
     }
 })();
-
+/*第四屏操作*/
+var fourth = (function () {
+    function on() {
+        var $p = $('.title'),
+            $box = $('.box'),
+            $list = $box.find('li');
+        $list.each(function (index, item) {
+            $(item).on('click', function () {
+                switch ($(item).html()){
+                    case '拼图':
+                        $box.animate({'opacity': 1}, 800, function () {
+                            $puzzle.css('display', 'block').addClass('on');
+                        });
+                        break;
+                    case '3D':
+                        console.log(2);
+                        break;
+                    case '弹弹球':
+                        console.log(3);
+                        break;
+                    default:
+                        console.log(4);
+                }
+                $box.removeClass('off');
+                $box.addClass('on');
+                $p.css('marginTop', '1rem').html('点击返回');
+            });
+        });
+        $p.on('click', function () {
+            $box.removeClass('on');
+            $box.addClass('off');
+            $box.siblings().css('display', 'none');
+            $(this).css('display', 'block');
+            $p.css('marginTop', '1.5rem').html('作品展示');
+        });
+        var $puzzle = $('.puzzle'),
+            $spans = $puzzle.find('span'),
+            span = $spans[0],
+            positionList = [['0px', '0px'],['100px', '0px'],['200px', '0px'],['0px', '100px'],['100px', '100px'],['200px', '100px'],['0px', '200px'],['100px', '200px'],['200px', '200px']],
+            list1 = positionList.slice(),
+            num = 0,
+            key = null,
+            step = 0,
+            $b = $puzzle.find('b');
+        $spans.each(function (index, item) {
+            $(item).on('click', function () {
+                if(($(this).css('left') == $(span).css('left')) && (Math.abs(parseFloat($(this).css('top')) - parseFloat($(span).css('top'))) <= 100)){
+                    var t = $(this).css('top'),
+                        l = $(this).css('left');
+                    $(this).css('left', $(span).css('left')).css('top', $(span).css('top'));
+                    $(span).css('left', l).css('top', t);
+                    $b.html('步数：' + ++step);
+                    check();
+                    return;
+                }
+                if(($(this).css('top') == $(span).css('top')) && (Math.abs(parseFloat($(this).css('left')) - parseFloat($(span).css('left'))) <= 100)){
+                    var t = $(this).css('top'),
+                        l = $(this).css('left');
+                    $(this).css('left', $(span).css('left')).css('top', $(span).css('top'));
+                    $(span).css('left', l).css('top', t);
+                    $b.html('步数：' + ++step);
+                    check();
+                }
+            })
+        });
+        function setPosition() {
+            step = 0;
+            $spans.each(function (index, item) {
+                num = Math.round(Math.random() * (list1.length - 1));
+                key = list1.splice(num, 1);
+                $(item).css({'left': key[0][0], 'top': key[0][1]});
+            })
+        }
+        setPosition();
+        function check() {
+            for(var i = 0; i < positionList.length; i++){
+                if(!($spans[i].style.left == positionList[i][0] && $spans[i].style.top == positionList[i][1])){
+                    return;
+                }
+            }
+            window.setTimeout(function () {
+                alert("Congratulation！Your score is : " + step);
+                setPosition();
+            }, 500);
+        }
+    }
+    return {
+        init: function () {
+            on();
+        }
+    }
+})();
 /*顶部状态栏*/
 var topState = (function () {
     function topReset() {
@@ -142,4 +233,5 @@ var topState = (function () {
 window.onload = function () {
     musicPlay.init();
     topState.init();
+    fourth.init();
 };
