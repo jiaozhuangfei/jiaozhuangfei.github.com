@@ -127,7 +127,7 @@ var fourth = (function () {
                 }
                 $box.removeClass('off');
                 $box.addClass('on');
-                $p.css('marginTop', '1rem').html('点击返回');
+                $p.css('marginTop', '.5rem').html('点击返回');
             });
         });
         $p.on('click', function () {
@@ -135,7 +135,7 @@ var fourth = (function () {
             $box.addClass('off');
             $box.siblings().css('display', 'none');
             $(this).css('display', 'block');
-            $p.css('marginTop', '1.5rem').html('作品展示');
+            $p.css('marginTop', '1rem').html('作品展示');
         });
         var $puzzle = $('.puzzle'),
             $spans = $puzzle.find('span'),
@@ -148,6 +148,7 @@ var fourth = (function () {
             $b = $puzzle.find('b');
         $spans.each(function (index, item) {
             $(item).on('click', function () {
+                if(index == 0) return;
                 if(($(this).css('left') == $(span).css('left')) && (Math.abs(parseFloat($(this).css('top')) - parseFloat($(span).css('top'))) <= 100)){
                     var t = $(this).css('top'),
                         l = $(this).css('left');
