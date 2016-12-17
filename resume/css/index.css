@@ -1,4 +1,4 @@
-html, body, .main{width: 100%; height: 100%; position: relative; font-size: 100px; font-family: 'microsoft yahei';}
+html, body, .main{width: 100%; height: 100%; position: relative; font-family: 'microsoft yahei';}
 .swiper-container{width: 100%; height: 100%; font-size: 0.16rem;}
 .swiper-container1 .slide11{background: url("../images/8d5494eef01f3a295d0cc1ba9c25bc315d607cf9.jpg") no-repeat center; background-size: 100% 100%;}
 .slide22 .swiper-container2{background: url("../images/20150221041308_kCLEa.thumb.700_0.jpeg") no-repeat; background-size: 100% 100%; color: #fff;}
