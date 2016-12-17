@@ -107,7 +107,19 @@ var fourth = (function () {
     function on() {
         var $p = $('.title'),
             $box = $('.box'),
-            $list = $box.find('li');
+            $list = $box.find('li'),
+            $puzzle = $('.puzzle'),
+            $three_dimensional = $('.three-dimensional'),
+            $ball = $('.ball'),
+            $baw = $('.baw'),
+            $spans = $puzzle.find('span'),
+            span = $spans[0],
+            positionList = [['0px', '0px'],['100px', '0px'],['200px', '0px'],['0px', '100px'],['100px', '100px'],['200px', '100px'],['0px', '200px'],['100px', '200px'],['200px', '200px']],
+            list1 = null,
+            num = 0,
+            key = null,
+            step = 0,
+            $b = $puzzle.find('b');
         $list.each(function (index, item) {
             $(item).on('click', function () {
                 switch ($(item).html()){
@@ -117,13 +129,19 @@ var fourth = (function () {
                         });
                         break;
                     case '3D':
-                        console.log(2);
+                        $box.animate({'opacity': 1}, 800, function () {
+                            $three_dimensional.css('display', 'block').addClass('on');
+                        });
                         break;
                     case '弹弹球':
-                        console.log(3);
+                        $box.animate({'opacity': 1}, 800, function () {
+                            $ball.css('display', 'block').addClass('on');
+                        });
                         break;
                     default:
-                        console.log(4);
+                        $box.animate({'opacity': 1}, 800, function () {
+                            $baw.css('display', 'block').addClass('on');
+                        });
                 }
                 $box.removeClass('off');
                 $box.addClass('on');
@@ -137,15 +155,6 @@ var fourth = (function () {
             $(this).css('display', 'block');
             $p.css('marginTop', '1rem').html('作品展示');
         });
-        var $puzzle = $('.puzzle'),
-            $spans = $puzzle.find('span'),
-            span = $spans[0],
-            positionList = [['0px', '0px'],['100px', '0px'],['200px', '0px'],['0px', '100px'],['100px', '100px'],['200px', '100px'],['0px', '200px'],['100px', '200px'],['200px', '200px']],
-            list1 = null,
-            num = 0,
-            key = null,
-            step = 0,
-            $b = $puzzle.find('b');
         $spans.each(function (index, item) {
             $(item).on('click', function () {
                 if(index == 0) return;
