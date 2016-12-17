@@ -172,12 +172,12 @@ html, body, .main{width: 100%; height: 100%; position: relative; font-size: 100p
 .slide22 .swiper-container2 #slide4 .content{_display: none;}
 .slide22 .swiper-container2 #slide4 .content .title{font-size: .5rem; text-align: center; margin-top: 1.5rem; font-weight: bold; transition: 1s; animation: bounceInDown 1s both;}
 .slide22 .swiper-container2 #slide4 .content .box{position: absolute; left: 50%; top: 50%; margin: -1.2rem 0 0 -1.5rem; overflow: hidden;}
-.slide22 .swiper-container2 #slide4 .content .box.on{animation: fadeOutDownBig 1s 1 both;}
+.slide22 .swiper-container2 #slide4 .content .box.on{animation: fadeOutDownBig 2s 1 both;}
 .slide22 .swiper-container2 #slide4 .content .box.off{animation: fadeInUpBig 1s 1 both;}
 .slide22 .swiper-container2 #slide4 .content .box .list{width: 3rem; height: 3rem;}
 .slide22 .swiper-container2 #slide4 .content .box .list li{font-size: .16rem; float: left; background: url("../images/stars.png") no-repeat; background-size: 1rem 1rem; width: 1rem; height: 1rem; margin: .3rem .25rem; line-height: 1rem; text-align: center; animation: zoomInUp 1s both; color: #000;}
 .slide22 .swiper-container2 #slide4 .content .puzzle{width: 300px; height: 400px; position: absolute; left: 50%; top: 50%; margin: -170px 0 0 -150px; font-size: 0; display: none;}
-.slide22 .swiper-container2 #slide4 .content .puzzle.on{animation: zoomIn 1s 1 linear;}
+.slide22 .swiper-container2 #slide4 .content .puzzle.on{animation: zoomIn .5s 1 linear;}
 .slide22 .swiper-container2 #slide4 .content .puzzle span{display: inline-block; width: 100px; height: 100px; background: url("../images/puzzle.jpg") no-repeat; background-size: 300px; position: absolute; transition: .3s;}
 .slide22 .swiper-container2 #slide4 .content .puzzle span:nth-child(1){background-position: 0 0; opacity: .6;}
 .slide22 .swiper-container2 #slide4 .content .puzzle span:nth-child(2){background-position: -100px 0;}
@@ -188,9 +188,9 @@ html, body, .main{width: 100%; height: 100%; position: relative; font-size: 100p
 .slide22 .swiper-container2 #slide4 .content .puzzle span:nth-child(7){background-position: 0 -200px;}
 .slide22 .swiper-container2 #slide4 .content .puzzle span:nth-child(8){background-position: -100px -200px;}
 .slide22 .swiper-container2 #slide4 .content .puzzle span:nth-child(9){background-position: -200px -200px;}
-.slide22 .swiper-container2 #slide4 .content .puzzle p{position: absolute; height: 1rem; bottom: -.1rem; font-size: .3rem;}
+.slide22 .swiper-container2 #slide4 .content .puzzle p{position: absolute; height: 1rem; bottom: -.1rem;}
 .slide22 .swiper-container2 #slide4 .content .puzzle p i{display: inline-block; width: .9rem; height: .9rem; background: url("../images/pic.jpg") no-repeat; background-size: .9rem; margin-left: .5rem;}
-.slide22 .swiper-container2 #slide4 .content .puzzle p b{line-height: 1rem; vertical-align: top; margin-left: .3rem;}
+.slide22 .swiper-container2 #slide4 .content .puzzle p b{line-height: 1rem; vertical-align: top; margin-left: .3rem; font-size: .2rem;}
 
 /*第五屏*/
 .slide22 .swiper-container2 #slide5 .connect{width: 3rem; height: 5rem; border-radius: .2rem; margin: 1rem auto; background-color: rgba(177, 177, 177, .5); animation: bounceIn 1s both; text-align: center;}

@@ -141,7 +141,7 @@ var fourth = (function () {
             $spans = $puzzle.find('span'),
             span = $spans[0],
             positionList = [['0px', '0px'],['100px', '0px'],['200px', '0px'],['0px', '100px'],['100px', '100px'],['200px', '100px'],['0px', '200px'],['100px', '200px'],['200px', '200px']],
-            list1 = positionList.slice(),
+            list1 = null,
             num = 0,
             key = null,
             step = 0,
@@ -170,6 +170,8 @@ var fourth = (function () {
         });
         function setPosition() {
             step = 0;
+            $b.html('步数：' + step);
+            list1 = positionList.slice();
             $spans.each(function (index, item) {
                 num = Math.round(Math.random() * (list1.length - 1));
                 key = list1.splice(num, 1);
@@ -184,7 +186,7 @@ var fourth = (function () {
                 }
             }
             window.setTimeout(function () {
-                alert("Congratulation！Your score is : " + step);
+                alert("Congratulation！Your step is : " + step);
                 setPosition();
             }, 500);
         }
